@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Tome</string>
+    <string name="home">Home</string>
+    <string name="research">Ricerca</string>
+    <string name="profile">Profilo</string>
+
+    <string name="drawer_title">Seleziona una pagina</string>
+
+    <string name="home_header_title">Esplora i contenuti</string>
+    <string name="home_header_body">Tome è sempre aggiornato con tutte le categorie di libri</string>
+    <string name="research_header_title">Effettua le tue ricerche</string>
+    <string name="research_header_body">Tome ti permette di cercare i libri che sono presenti nel catalogo</string>
+    <string name="profile_header_title">Il tuo profilo</string>
+    <string name="profile_header_body">Tome conserva il tuo profilo e lo sincronizza su ogni dispositivo da cui effettui l\'accesso</string>
+
+    <string name="error_text_button">Riprova</string>
+    <string name="error_icon_button_description">Errore</string>
+
+    <string name="unknown_author">Sconosciuto</string>
+    <string name="show_more">Mostra altro</string>
+    <string name="research_hint">Cerca per %s…</string>
+    <string name="filter_description">Filtra i contenuti</string>
+    <string name="filter_title">Titolo</string>
+    <string name="filter_genre">Genere</string>
+    <string name="filter_author">Autore</string>
+    <string name="filter_publisher">Editore</string>
+    <string name="filter_isbn">ISBN</string>
+    <string name="profile_pic_description">Immagine del profilo</string>
+    <string name="profile_read_books">Libri letti</string>
+    <string name="profile_favorite_author">Autore preferito</string>
+    <string name="profile_favorite_book">Libro preferito</string>
+    <string name="profile_favorite_genre">Genere preferito</string>
+    <string name="profile_reading_books">Libri in lettura</string>
+    <string name="profile_toread_books">Libri da leggere</string>
+    <string name="detail_author">Autore</string>
+    <string name="detail_publisher">Editore</string>
+    <string name="detail_genre">Genere</string>
+    <string name="detail_language">Lingua</string>
+    <string name="detail_date">Anno di pubblicazione</string>
+    <string name="detail_description">Descrizione</string>
+    <string name="detail_pages">Numero di pagine</string>
+    <string name="detail_isbn_10">ISBN-10</string>
+    <string name="detail_isbn_13">ISBN-13</string>
+    <string name="back_description">Torna indietro</string>
+
+    <string name="category_literature">Letteratura</string>
+    <string name="category_adventure">Avventura</string>
+    <string name="category_fiction">Narrativa</string>
+    <string name="category_horror">Horror</string>
+    <string name="category_thriller">Thriller</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#FCDEBC</color>
+    <color name="splash_navigation">#F5EEEB</color>
+    <color name="logo_color">#281905</color>
+
+    <color name="surface1">#F9F3F2</color>
+    <color name="surface2">#F5EEEB</color>
+    <color name="surface3">#F2E9E3</color>
+    <color name="surface4">#F0E7E0</color>
+    <color name="surface5">#EEE4DB</color>
+</resources>
