@@ -1,5 +1,5 @@
 # Tome
-Android Application developed with Jetpack Compose: 06/12/2022
+Android Application developed with Jetpack Compose
 
 This demo application provides a way to view a subset of books available in the Google Books Library.
 It works based on the Google Books API to fetch books for the user through Internet.
