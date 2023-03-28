@@ -1,7 +1,3 @@
-# Test Directories
-app/src/androidTest
-app/src/test
-
 # Built application files
 *.apk
 *.aar

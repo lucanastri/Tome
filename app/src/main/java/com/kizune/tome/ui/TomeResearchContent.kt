@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -73,7 +74,7 @@ fun ResearchContent(
         items(books.criteria(filterType, searchQuery)) { book ->
             ResearchCard(
                 book = book,
-                onCardPressed = onCardPressed
+                onCardPressed = onCardPressed,
             )
         }
     }
@@ -147,6 +148,7 @@ fun ResearchPanel(
                 .fillMaxWidth()
                 .heightIn(40.dp)
                 .padding(horizontal = 16.dp)
+                .testTag("search_input")
         )
 
         LazyRow(

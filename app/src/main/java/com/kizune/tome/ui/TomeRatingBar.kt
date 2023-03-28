@@ -8,11 +8,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kotlin.math.floor
 
 /**
- * Composable che serve a visualizzare il rating in una barra composta da stelle
+ * Composable che serve a visualizzare il rating
+ * in una barra composta da stelle
  */
 @Composable
 fun RatingBar(
@@ -21,15 +23,18 @@ fun RatingBar(
     stars: Int = 5,
     showUnfilledStar: Boolean = false
 ) {
-    val filledStars = floor(rating).toInt()
-    val unfilledStars = stars - filledStars
+    val filledStars = if(rating > stars) stars else floor(rating).toInt()
+    val unfilledStars = if(rating >= 0) stars - filledStars else stars
+
 
     Row(modifier = modifier) {
         repeat(filledStars) {
             Icon(
                 imageVector = Icons.Rounded.Star,
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier
+                    .size(24.dp)
+                    .testTag("${it+1}_filled")
             )
         }
 
@@ -39,7 +44,9 @@ fun RatingBar(
                     imageVector = Icons.Rounded.Star,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier
+                        .size(24.dp)
+                        .testTag("${it+1}_unfilled")
                 )
             }
         }

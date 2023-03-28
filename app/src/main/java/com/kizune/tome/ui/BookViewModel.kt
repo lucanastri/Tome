@@ -1,6 +1,5 @@
 package com.kizune.tome.ui
 
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,7 +71,6 @@ class BookViewModel(
                     val q = "subject:$category"
 
                     bookRepository.getBooks(q, maxResults, startIndex).items.map { book ->
-                        Log.d("MyTag", book.toString())
                         map[book.id] = book
                     }
                     startIndex += 40

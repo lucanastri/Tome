@@ -1,5 +1,6 @@
 package com.kizune.tome.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +23,7 @@ import com.kizune.tome.R
 import com.kizune.tome.network.Book
 import com.kizune.tome.network.previewBook
 import com.kizune.tome.theme.TomeTheme
+import com.kizune.tome.utils.createAttributesList
 import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +64,7 @@ fun BookScreenContent(
     val imageLink = book.volumeInfo.imageLinks?.thumbnail ?: ""
     val fixedImageLink = imageLink.replace("http", "https")
 
-    val attributeList = createBookAttributeList(book)
+    val attributeList = book.createAttributesList()
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -89,10 +92,14 @@ fun BookScreenContent(
                 modifier = Modifier
                     .size(width = 150.dp, height = 240.dp)
                     .clip(RoundedCornerShape(12.dp))
+                    .testTag("thumbnail")
             )
         }
         item {
-            RatingBar(rating = book.volumeInfo.averageRating)
+            RatingBar(
+                rating = book.volumeInfo.averageRating,
+                modifier = Modifier.testTag("rating_bar")
+            )
             Spacer(modifier = Modifier.height(24.dp))
         }
 
@@ -122,11 +129,13 @@ fun AttributeGrid(
             .height(intrinsicSize = IntrinsicSize.Max)
     ) {
         repeat(columns) { index ->
+            Log.d("MyTag", index.toString())
             AttributeCard(
                 attribute = attributes[index],
                 modifier = Modifier
                     .weight(1f / columns)
                     .fillMaxHeight()
+                    .testTag("${index + 1}_attribute")
             )
         }
     }
@@ -138,6 +147,7 @@ fun AttributeGrid(
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .padding(top = 16.dp)
+                .testTag("bottom_description")
         )
     }
 }
@@ -171,99 +181,6 @@ fun AttributeCard(
             )
         }
     }
-}
-
-/**
- * Permette di creare una lista di Pair a seconda degli attributi del libro che sono disponibili
- * dalla GET
- */
-fun createBookAttributeList(book: Book): List<Pair<Int, String>> {
-    val list: ArrayList<Pair<Int, String>> = ArrayList()
-    val volumeInfo = book.volumeInfo
-
-    if (!volumeInfo.authors?.joinToString(separator = "\n").isNullOrBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_author,
-                book.volumeInfo.authors?.joinToString(separator = "\n") ?: ""
-            ),
-        )
-    }
-    if (volumeInfo.publisher.isNotBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_publisher,
-                book.volumeInfo.publisher
-            ),
-        )
-    }
-    if (!volumeInfo.categories?.joinToString(separator = "\n").isNullOrBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_genre,
-                book.volumeInfo.categories?.joinToString(separator = "\n") ?: ""
-            ),
-        )
-    }
-    val language = book.volumeInfo.language.let { language ->
-        Locale.forLanguageTag(language).displayLanguage.replaceFirstChar { first ->
-            if (first.isLowerCase()) first.titlecase(
-                Locale.getDefault()
-            ) else first.toString()
-        }
-    }
-    if (language.isNotBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_language,
-                language
-            )
-        )
-    }
-    if (volumeInfo.publishedDate.substring(0, 4).isNotBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_date,
-                book.volumeInfo.publishedDate.substring(0, 4)
-            ),
-        )
-    }
-    if (volumeInfo.pageCount != 0) {
-        list.add(
-            Pair(
-                R.string.detail_pages,
-                book.volumeInfo.pageCount.toString()
-            ),
-        )
-    }
-
-    if (!volumeInfo.industryIdentifiers?.getOrNull(0)?.identifier.isNullOrBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_isbn_10,
-                book.volumeInfo.industryIdentifiers?.getOrNull(0)?.identifier ?: ""
-            ),
-        )
-    }
-
-    if (!volumeInfo.industryIdentifiers?.getOrNull(1)?.identifier.isNullOrBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_isbn_13,
-                book.volumeInfo.industryIdentifiers?.getOrNull(1)?.identifier ?: ""
-            ),
-        )
-    }
-
-    if (volumeInfo.description.isNotBlank()) {
-        list.add(
-            Pair(
-                R.string.detail_description,
-                book.volumeInfo.description
-            )
-        )
-    }
-    return list
 }
 
 @Preview(showBackground = true)

@@ -14,7 +14,7 @@ data class VolumeInfo(
     @SerialName(value = "publisher")
     val publisher: String = "",
     @SerialName(value = "publishedDate")
-    val publishedDate: String = "",
+    val publishedDate: String = "1994",
     @SerialName(value = "description")
     val description: String = "",
     @SerialName(value = "industryIdentifiers")
